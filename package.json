@@ -1,0 +1,55 @@
+{
+  "name": "aspkg-cli",
+  "version": "1.0.0",
+  "description": "AssemblyScript Packages CLI",
+  "main": "dist/lib.js",
+  "bin": {
+    "aspkg": "dist/cli.js"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "aspkg": {
+    "type": "git",
+    "platforms": [
+      "wasm",
+      "node",
+      "web"
+    ]
+  },
+  "scripts": {
+    "build": "tsc -w",
+    "aspkg": "node dist/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aspkg/Website.git"
+  },
+  "keywords": [
+    "AssemblyScript",
+    "Package",
+    "aspkg",
+    "CLI"
+  ],
+  "author": "Roman F. <romdotdog> + Jairus Tanaka",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aspkg/Website/issues"
+  },
+  "homepage": "https://github.com/aspkg/Website#readme",
+  "dependencies": {
+    "blake3": "^2.1.4",
+    "chalk": "^4.1.1",
+    "open": "^8.2.1",
+    "undici-fetch": "^1.0.0-rc.4",
+    "yargs": "^17.0.1"
+  },
+  "devDependencies": {
+    "@types/yargs": "^17.0.2",
+    "@typescript-eslint/eslint-plugin": "^4.28.3",
+    "@typescript-eslint/parser": "^4.28.3",
+    "eslint": "^7.30.0",
+    "prettier": "^2.3.2",
+    "typescript": "^4.3.5"
+  }
+}

@@ -7,7 +7,8 @@ import {
 	ExpiredCodeException,
 	IncorrectClientCredentials,
 	NotAuthenticatedException,
-	UnsupportedGrantType
+	UnsupportedGrantType,
+	InvalidStatusCode
 } from "./errors";
 import { client_id, scope } from "./config";
 import fetch, { Headers } from "undici-fetch";
@@ -67,8 +68,7 @@ export async function authenticated(): Promise<boolean> {
  * @async
  * @returns {Promise<void>} a Promise that resolves when publish is successful.
  * @throws {@link AlreadyAuthenticatedException}
- * @throws {@link ExpiredCodeException}
- * @throws {@link AccessDenied}
+ * @throws {@link InvalidStatusCode}
  */
 export async function publish(): Promise<void> {
 	const isAuthenticated = await authenticated();
@@ -95,7 +95,7 @@ export async function publish(): Promise<void> {
 		res =>
 			new Promise((resolve, reject) => {
 				if (res.status === 200) return resolve();
-				return reject(`Could not publish package.\nStatus code ${res.status}`);
+				return reject(new InvalidStatusCode(res.status));
 			})
 	);
 }

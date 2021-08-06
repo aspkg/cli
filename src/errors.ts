@@ -66,3 +66,13 @@ export class NotAuthenticatedException extends Error {
 		this.name = "NotAuthenticated";
 	}
 }
+
+/**
+ * Thrown when the aspkg website returns a non-OK status code.
+ */
+export class InvalidStatusCode extends Error {
+	constructor(status: number) {
+		super(`Server returned non-OK status code ${status}`);
+		this.name = "InvalidStatusCode";
+	}
+}

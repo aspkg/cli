@@ -71,28 +71,30 @@ export async function authenticated(): Promise<boolean> {
  * @throws {@link AccessDenied}
  */
 export async function publish(): Promise<void> {
-	return new Promise<void>(async (resolve, reject) => {
-		const isAuthenticated = await authenticated();
-		if (!isAuthenticated) {
-			throw new NotAuthenticatedException();
-		}
-		const pkg = JSON.parse(
-			fs.readFileSync(path.join(process.cwd(), "/package.json")).toString()
-		);
+	const isAuthenticated = await authenticated();
+	if (!isAuthenticated) {
+		throw new NotAuthenticatedException();
+	}
+	const pkg = JSON.parse(
+		fs.readFileSync(path.join(process.cwd(), "/package.json")).toString()
+	);
 
-		const headers = new Headers();
-		headers.set("content-type", "application/json;charset=utf-8");
-		headers.set("user-agent", "aspkg-cli");
-		headers.set("authorization", config.accessToken!);
-		await fetch("http://localhost:3000/api-publish", {
-			method: "POST",
-			headers: headers,
-			body: JSON.stringify(pkg)
-		}).then(res => {
-			if (res.status === 200) return resolve();
-			return reject(`Could not publish package\nStatus code ${res.status}`);
-		});
-	});
+	const headers = new Headers();
+	headers.set("content-type", "application/json;charset=utf-8");
+	headers.set("user-agent", "aspkg-cli");
+	headers.set("authorization", config.accessToken!);
+
+	return fetch("http://localhost:3000/api-publish", {
+		method: "POST",
+		headers: headers,
+		body: JSON.stringify(pkg)
+	}).then(
+		res =>
+			new Promise((resolve, reject) => {
+				if (res.status === 200) return resolve();
+				return reject(`Could not publish package.\nStatus code ${res.status}`);
+			})
+	);
 }
 
 /**

@@ -42,7 +42,7 @@ yargs(hideBin(process.argv))
 				}
 				if (version !== "") pkg["version"] = version;
 				console.log("Uploading...");
-				await publish();
+				await publish(process.cwd());
 				console.log(
 					chalk.greenBright`Published`,
 					chalk.bold.blueBright`${pkg["name"]}@${pkg["version"]}`

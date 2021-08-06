@@ -70,7 +70,7 @@ export async function authenticated(): Promise<boolean> {
  * @throws {@link AlreadyAuthenticatedException}
  * @throws {@link InvalidStatusCode}
  */
-export async function publish(): Promise<void> {
+export async function publish(directory: string): Promise<void> {
 	const isAuthenticated = await authenticated();
 	const { accessToken } = config;
 
@@ -79,7 +79,7 @@ export async function publish(): Promise<void> {
 	}
 
 	const pkg = JSON.parse(
-		fs.readFileSync(path.join(process.cwd(), "/package.json")).toString()
+		fs.readFileSync(path.join(directory, "/package.json")).toString()
 	);
 
 	const headers = new Headers();

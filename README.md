@@ -59,12 +59,13 @@ const user = await aspkg.whoami();
 
 ### publish
 
-Publish the package in the current directory
+Publish the package in the desired directory
 
 ```js
 const aspkg = require("aspkg");
 
-await aspkg.publish();
+const dir = process.env();
+await aspkg.publish(dir);
 ```
 
 ## Credits

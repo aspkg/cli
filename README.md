@@ -1,31 +1,23 @@
-# Aspkg-CLI
+# aspkg-cli
 **The AssemblyScript Packages CLI 📦**
 
 ## Installation
 
+**CLI**
 ```bash
 npm install aspkg -g
 ```
 
-## Commands
- - aspkg publish
-    Publish the package
- - aspkg login
-    Login in to the registry
- - aspkg logout
-    Log out of the registry
- - aspkg whoami
-    Returns the authenticated user's GitHub username
- - aspkg help
-    Displays help
-
-## Programmatic Usage
-
+**JS API**
 ```bash
 npm install aspkg
 ```
 
-**Login**
+## Commands & Programmatic Usage
+To list all CLI commands, use `aspkg help`.
+
+### login
+Log in through GitHub to the registry
 ```js
 const aspkg = require('aspkg')
 
@@ -37,16 +29,29 @@ aspkg.login((code, url) => {
 })
 ```
 
-**Logout**
+### logout
+Log out of the registry
 ```js
 const aspkg = require('aspkg')
 
 await aspkg.logout()
 ```
 
-**Whoami**
+### whoami
+Returns the authenticated user's GitHub username
 ```js
 const aspkg = require('aspkg')
 
 const user = await aspkg.whoami()
 ```
+
+### publish
+Publish the package in the current directory
+```js
+const aspkg = require('aspkg')
+
+await aspkg.publish()
+```
+
+## Credits
+Initially created by [rom](https://github.com/romdotdog) with oversight from [JairusSW](https://github.com/JairusSW)

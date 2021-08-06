@@ -5,14 +5,7 @@ import {
 	AlreadyAuthenticatedException,
 	NotAuthenticatedException
 } from "./errors";
-import {
-	login,
-	logout,
-	waitForLocks,
-	whoami,
-	publish,
-	authenticated
-} from "./lib";
+import { login, logout, waitForLocks, whoami, publish } from "./lib";
 import chalk from "chalk";
 import open from "open";
 import readline from "readline";
@@ -166,7 +159,7 @@ async function gracefulShutdown(code?: number) {
 }
 
 async function terminalPrompt(prompt: string): Promise<string> {
-	return new Promise<string>((resolve, reject) => {
+	return new Promise<string>(resolve => {
 		rline.question(prompt, res => {
 			resolve(res);
 		});
@@ -174,7 +167,7 @@ async function terminalPrompt(prompt: string): Promise<string> {
 }
 
 async function validateVersion(version: string): Promise<boolean> {
-	return new Promise<boolean>((resolve, reject) => {
+	return new Promise<boolean>(resolve => {
 		let foundDecs = 0;
 		let len = version.length;
 		while (len--) {

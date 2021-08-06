@@ -72,9 +72,12 @@ export async function authenticated(): Promise<boolean> {
  */
 export async function publish(): Promise<void> {
 	const isAuthenticated = await authenticated();
-	if (!isAuthenticated) {
+	const { accessToken } = config;
+
+	if (!isAuthenticated || accessToken === undefined) {
 		throw new NotAuthenticatedException();
 	}
+
 	const pkg = JSON.parse(
 		fs.readFileSync(path.join(process.cwd(), "/package.json")).toString()
 	);
@@ -82,7 +85,7 @@ export async function publish(): Promise<void> {
 	const headers = new Headers();
 	headers.set("content-type", "application/json;charset=utf-8");
 	headers.set("user-agent", "aspkg-cli");
-	headers.set("authorization", config.accessToken!);
+	headers.set("authorization", accessToken);
 
 	return fetch("http://localhost:3000/api-publish", {
 		method: "POST",

@@ -44,7 +44,7 @@ export class IncorrectClientCredentials extends Error {
 }
 
 /**
- * Thrown when cancel is clicked in the authorize UI prompt.
+ * Thrown when cancel is selected in the authorize UI prompt.
  */
 export class AccessDenied extends Error {
     constructor() {

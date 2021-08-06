@@ -65,7 +65,7 @@ export async function authenticated(): Promise<boolean> {
 /**
  * Publishes a package.
  * @async
- * @returns {Promise<void>} a Promise that resolves when publish successful.
+ * @returns {Promise<void>} a Promise that resolves when publish is successful.
  * @throws {@link AlreadyAuthenticatedException}
  * @throws {@link ExpiredCodeException}
  * @throws {@link AccessDenied}
